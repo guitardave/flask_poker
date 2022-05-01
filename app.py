@@ -1,7 +1,9 @@
 from flask import Flask, render_template
 import random
+import os
 
 
+card_path = os.environ.get('CARD_PATH')
 cards = [
     ('Spades', 'A', 'Spades_A.jpg'),
     ('Spades', 'K', 'Spades_K.jpg'),
@@ -74,10 +76,8 @@ def deal_hand():
     all_players = []
     while i < max_hand * rep:
         for j in range(rep):
-            print('** PLAYER {} **'.format(str(j + 1)))
             d = deck[i]
-            print('-- {} {}'.format(d[1], d[0]))
-            all_players.append(dict(player=f'Player {j+1}', card_face=d[0], card_val=d[1], card_img=d[2]))
+            all_players.append(dict(player=f'Player {j+1}', card_face=d[0], card_val=d[1], card_img=card_path + d[2]))
             i += 1
 
     return all_players

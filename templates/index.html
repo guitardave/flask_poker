@@ -9,6 +9,9 @@
             font-family: Arial, serif;
             color: #e1e1e1;
         }
+        img {
+            width:50%;
+        }
     </style>
 </head>
 <body>
@@ -24,7 +27,9 @@
         {% for card in cards|batch(4) %}
             <tr>
                 {% for c in card %}
-                    <td><img style="width:50%" src="{{url_for('static', filename='cards/' + c['card_img']) }}" alt="{{ c['card_face'] }} {{ c['card_val'] }}"></td>
+                    <td>
+                        <img src="{{ c['card_img'] }}" alt="{{ c['card_face'] }} {{ c['card_val'] }}">
+                    </td>
                 {% endfor %}
             </tr>
         {% endfor %}
