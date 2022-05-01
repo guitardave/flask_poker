@@ -1,2 +1,1 @@
-web: gunicorn app:DeckOfCards
-web: gunicorn run:DeckOfCards
+web: gunicorn --worker-tmp-dir /dev/shm app:app
