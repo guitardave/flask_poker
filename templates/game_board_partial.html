@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-sm-3">P1</div>
+    <div class="col-sm-3">P2</div>
+    <div class="col-sm-3">P3</div>
+    <div class="col-sm-3">P4</div>
+</div>
+{% for card in cards|batch(4) %}
+    <div class="row">
+        {% for c in card %}
+            <div class="col-sm-3">
+                <img class="img-thumbnail"
+                     src="{{ c.card_img }}"
+                     alt="{{ c.card_face }} {{ c.card_val }}"
+                     data-face="{{ c.card_face }}"
+                     data-value="{{ c.card_val }}">
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}

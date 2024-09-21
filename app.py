@@ -43,8 +43,14 @@ class Poker:
 @app.route('/')
 def index():  # put application's code here
     poker = Poker()
-    all_players = poker.deal_hand()
-    return render_template('index.html', cards=all_players)
+    return render_template('index.html', cards=poker.deal_hand())
+
+
+@app.route('/shuffle/')
+def shuffle():
+    poker = Poker()
+    poker.shuffle_deck()
+    return render_template('game_board_partial.html', cards=poker.deal_hand())
 
 
 if __name__ == '__main__':
