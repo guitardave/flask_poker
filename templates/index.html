@@ -1,72 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
 	<!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/32ec139a8a.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link href="{{ url_for('static', filename='jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <title>5-card Stud</title>
-    <style type="text/css">
-        body {
-            background-color: #010101;
-            font-family: Arial, serif;
-            color: #e1e1e1;
-        }
-        img {
-            width:50%;
-        }
-        h1, p {
-            text-align: center;
-            color: #e1e1e1;
-        }
-        table {
-            horiz-align: center;
-            margin-top: 5rem;
-        }
-        th, td {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 </head>
 <body>
 {% block header %}
 	<header class="site-header">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">Home</a>
-            <div class="nav-item"><h1>Poker</h1></div>
+          <a class="navbar-brand mr-4" href="/"></a>
             <!-- Navbar Right Side -->
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="https://jojodave.com">Baseball Card Database</a>
-            </div>
+
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://jojodave.com"><small class="text-muted">Baseball Card Database</small></a>
+                </li>
+            </ul>
         </div>
       </nav>
     </header>
 {% endblock %}
     <div class="container">
-
-        <table align="center" class="table table-dark table-sm">
-            <tr>
-                <th width="150px">Player 1</th>
-                <th width="150px">Player 2</th>
-                <th width="150px">Player 3</th>
-                <th width="150px">Player 4</th>
-            </tr>
-
-            {% for card in cards|batch(4) %}
-                <tr>
-                    {% for c in card %}
-                        <td>
-                            <img src="{{ c['card_img'] }}" alt="{{ c['card_face'] }} {{ c['card_val'] }}">
-                        </td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-        <p>Copyright &copy; 2022 Crandell</p>
+        <div class="card mt-5">
+            <div class="card-header">
+                <h1>Idiot Poker</h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">Player 1</div>
+                    <div class="col-sm-3">Player 2</div>
+                    <div class="col-sm-3">Player 3</div>
+                    <div class="col-sm-3">Player 4</div>
+                </div>
+                {% for card in cards|batch(4) %}
+                    <div class="row">
+                        {% for c in card %}
+                            <div class="col-sm-3">
+                                <img class="img-thumbnail" src="{{ c['card_img'] }}" alt="{{ c['card_face'] }} {{ c['card_val'] }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    {% include 'game_count_partial.html' %}
+                </small>
+            </div>
+        </div>
+        <footer>
+            <p class="small text-muted">Copyright &copy; 2022 Crandell</p>
+        </footer>
     </div>
 </body>
 </html>

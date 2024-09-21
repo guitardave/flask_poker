@@ -1,0 +1,22 @@
+body {
+    font-family: "Arial Narrow", serif;
+}
+/*img {*/
+/*    width:50%;*/
+/*}*/
+h1, p {
+    text-align: center;
+}
+h1 {
+    font-size: 20px;
+}
+table {
+    horiz-align: center;
+    margin-top: 5rem;
+}
+th, td {
+    text-align: center;
+}
+nav {
+    max-height: 40px;
+}
