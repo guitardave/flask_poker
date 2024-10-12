@@ -1,6 +1,5 @@
 import random
 import os
-from datetime import datetime
 
 from .deck_of_cards import CARDS
 
@@ -22,17 +21,31 @@ class SimpleCardGame:
     def get_card_face(card: dict) -> str:
         return str(card['value'][1])
 
+    @staticmethod
+    def get_player_cards(c_list: list, card: dict) -> list[dict]:
+        c_list.append(card)
+        return c_list
+
+    @staticmethod
+    def get_winner(c_list: list):
+        total = 0
+        for c in c_list:
+            total += c['value'][0]
+        return total
+
+    def draw_card(self, n: int) -> dict:
+        return self.cards[n]
+
     def shuffle_deck(self) -> list:
         deck = self.cards
         random.shuffle(deck)
         return deck
 
-    def deal_hand(self) -> list[dict]:
+    def deal_hand(self) -> tuple[list[dict], int]:
         deck = self.shuffle_deck()
         player_cards = []
-        player_calc = self.max_hand * self.n_players
         i = 0
-        while i < player_calc:
+        while i < self.max_hand * self.n_players:
             for j in range(self.n_players):
                 d = deck[i]
                 player_cards.append(
@@ -40,43 +53,7 @@ class SimpleCardGame:
                         player=f'Player {j+1}',
                         card_face=self.get_card_face(d),
                         card_val=self.get_card_val(d),
-                        card_img=self.CARD_PATH + d['img'])
+                        card_img=d['img'])
                 )
                 i += 1
-
-        return player_cards
-
-
-class GameDetail:
-    def __init__(self, max_h: int = None, min_h: int = None, n_p: int = None):
-        self.max_h = max_h if max_h else 5
-        self.min_h = min_h if min_h else 5
-        self.n_p = n_p if n_p else 2
-        self.scg = SimpleCardGame(self.max_h, self.min_h, self.n_p)
-
-    def g_details(self) -> dict:
-        return {'max_h': self.max_h, 'min_h': self.min_h, 'n_p': self.n_p}
-
-    def g_divider(self) -> int:
-        return int(12 / self.n_p)
-
-    def g_context(self) -> dict:
-        return {
-            'cards': self.scg.deal_hand(),
-            'year': datetime.strftime(datetime.now(), '%Y'),
-            'n_players': self.scg.n_players,
-            'n': self.g_divider()
-        }
-
-
-class CompareValues:
-    def __init__(self, cards: list, max_value: int = None):
-        self.cards = cards
-        self.max_value = max_value if max_value else 21
-
-    def compare(self) -> int:
-        total = 0
-        for card in self.cards:
-            val = card['value'][0]
-            total += val
-        return total
+        return player_cards, i

@@ -4,8 +4,7 @@ from flask import Flask, render_template, request
 from flask_wtf import CSRFProtect
 from flask_cors import CORS, cross_origin
 
-from card_game.simple_card_game import GameDetail
-
+from game_detail import GameDetail
 from forms import GameForm
 
 

@@ -1,3 +1,4 @@
+{#<div class="row col-sm-12">{{ n_cards }}</div>#}
 {#<div class="row">#}
 {##}
 {#    <div class="col-sm-2">P1</div>#}
@@ -8,7 +9,7 @@
             <div class="col-sm-{{ n }}">
                 <div class="card-img">
                     <img class="img-fluid"
-                         src="{{ c.card_img }}"
+                         src="{{ url_for('static', filename='cards/'+c.card_img) }}"
                          alt="{{ c.card_face }} {{ c.card_val }}"
                          data-face="{{ c.card_face }}"
                          data-value="{{ c.card_val }}">

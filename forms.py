@@ -5,7 +5,7 @@ from wtforms.fields.simple import SubmitField
 
 class GameForm(FlaskForm):
     class Players:
-        N_PLAYERS = [('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')]
+        N_PLAYERS = [('2', '2'), ('3', '3'), ('4', '4'), ('6', '6')]
 
     class GameList:
         GAME_LIST = [('2,2', 'Blackjack'), ('5,5', '5-Card Stud')]
