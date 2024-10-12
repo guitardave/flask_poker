@@ -1,0 +1,24 @@
+<form method="post" action="{{ url_for('index') }}" id="form">
+    <div class="row">
+        <div class="col-sm-4">
+            {{ form.n_players.label }}
+        </div>
+        <div class="col-sm-4">
+            {{ form.game.label }}
+        </div>
+        <div class="col-sm-4">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            {{ form.n_players(class_="form-control form-control-lg") }}
+        </div>
+        <div class="col-sm-4">
+            {{ form.game(class_="form-control form-control-lg") }}
+        </div>
+        <div class="col-sm-4">
+            {{ form.submit(class_="btn btn-outline-secondary btn-lg") }}
+{#            <button id="b-deal" class="btn btn-lg btn-outline-secondary"><i class="fa fa-arrow-right"></i></button>#}
+        </div>
+    </div>
+    {{ form.csrf_token }}
+</form>

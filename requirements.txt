@@ -1,2 +1,5 @@
 gunicorn
 flask
+flask-cors
+flask-wtf
+wtforms
