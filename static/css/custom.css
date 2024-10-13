@@ -1,9 +1,6 @@
 body {
-    font-family: "Arial Narrow", serif;
+    font-family: "Calibri Light", serif;
 }
-/*img {*/
-/*    width:50%;*/
-/*}*/
 
 h1 {
     font-size: 20px;
@@ -17,4 +14,7 @@ th, td {
 }
 nav {
     max-height: 40px;
+}
+.winner {
+    color: #2f8de0;
 }

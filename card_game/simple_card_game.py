@@ -61,10 +61,6 @@ class SimpleCardGame:
         return score
 
     def get_winner(self, card_lists: list):
-        players = []
-        for n in range(self.n_players):
-            score = self.get_score(card_lists[n][1])
-            players.append((n, score))
+        players = [(n, self.get_score(card_lists[n][1])) for n in range(self.n_players)]
         players.sort(key=lambda x: x[1], reverse=True)
-        # print(players)
-        return players[0]
+        return players[0] if players[0][1] <= 21 else players[1]

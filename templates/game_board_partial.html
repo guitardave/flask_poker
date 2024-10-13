@@ -7,11 +7,11 @@
                 <div class="col-sm-6">
                     Player {{ player_num }}
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 me-auto text-end">
                     {% if c_list.0 == winner %}
-                        <small class="text-muted">
-                            <i class="fa fa-star"></i>WINNER<i class="fa fa-star"></i>
-                        </small>
+                        <span class="badge bg-warning text-dark">
+                            <i class="fa fa-star-o"></i> WINNER <i class="fa fa-star-o"></i>
+                        </span>
                     {% endif %}
                 </div>
             </div>
@@ -23,8 +23,8 @@
         {% for c in card %}
             <div class="col-sm-{{ n }}">
                 <div class="card-img">
-                    <img class="img-fluid playing-card"
-                         src="{{ url_for('static', filename='cards/' + c.card_img) }}"
+                    <img class="img-thumbnail playing-card"
+                         src="{{ url_for('static', filename='svg_playing_cards/fronts/' + c.card_img) }}"
                          alt="Player {{ c.player }} {{ c.card_slug }}"
                          data-player="{{ c.player }}"
                          data-face="{{ c.card_face }}"
