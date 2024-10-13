@@ -10,9 +10,6 @@ class GameDetail:
         self.n_p = n_p if n_p else 4
         self.scg = SimpleCardGame(self.max_h, self.min_h, self.n_p)
 
-    def g_details(self) -> dict:
-        return {'max_h': self.max_h, 'min_h': self.min_h, 'n_p': self.n_p}
-
     def g_divider(self) -> int:
         return int(12 / self.n_p)
 
@@ -21,7 +18,9 @@ class GameDetail:
         return {
             'cards': scg[0],
             'n_cards': scg[1],
+            'card_lists': scg[2],
             'year': datetime.strftime(datetime.now(), '%Y'),
             'n_players': self.scg.n_players,
-            'n': self.g_divider()
+            'n': self.g_divider(),
+            'winner': self.scg.get_winner(scg[2])[0]
         }

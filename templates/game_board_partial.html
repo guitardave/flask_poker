@@ -1,16 +1,32 @@
-{#<div class="row col-sm-12">{{ n_cards }}</div>#}
-{#<div class="row">#}
-{##}
-{#    <div class="col-sm-2">P1</div>#}
-{#</div>#}
+{#<div class="row col-sm-12">{{ winner.0 }}</div>#}
+<div class="row">
+    {% for c_list in card_lists %}
+        <div class="col-sm-{{ n }}">
+            {% set player_num = c_list.0 + 1 -%}
+            <div class="row">
+                <div class="col-sm-6">
+                    Player {{ player_num }}
+                </div>
+                <div class="col-sm-6">
+                    {% if c_list.0 == winner %}
+                        <small class="text-muted">
+                            <i class="fa fa-star"></i>WINNER<i class="fa fa-star"></i>
+                        </small>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% for card in cards|batch(n_players) %}
     <div class="row">
         {% for c in card %}
             <div class="col-sm-{{ n }}">
                 <div class="card-img">
-                    <img class="img-fluid"
-                         src="{{ url_for('static', filename='cards/'+c.card_img) }}"
-                         alt="{{ c.card_face }} {{ c.card_val }}"
+                    <img class="img-fluid playing-card"
+                         src="{{ url_for('static', filename='cards/' + c.card_img) }}"
+                         alt="Player {{ c.player }} {{ c.card_slug }}"
+                         data-player="{{ c.player }}"
                          data-face="{{ c.card_face }}"
                          data-value="{{ c.card_val }}">
                 </div>
