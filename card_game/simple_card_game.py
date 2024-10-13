@@ -6,6 +6,8 @@ from .deck_of_cards import CARDS
 
 class SimpleCardGame:
     CARD_PATH = os.environ.get('CARD_PATH')
+    DECK_SIZE = 52
+    MAX_SCORE = 21
 
     def __init__(self, max_hand: int, min_hand: int, n_players: int):
         self.max_hand = max_hand
@@ -24,11 +26,10 @@ class SimpleCardGame:
     def get_player_card_lists(self) -> list:
         return [(n, []) for n in range(self.n_players)]
 
-    @staticmethod
-    def draw_card(n: int, deck: list) -> dict:
-        return deck[n + 1] if n < 52 else {}
+    def draw_card(self, n: int, deck: list) -> dict:
+        return deck[n + 1] if n < self.DECK_SIZE else {}
 
-    def shuffle_deck(self) -> list:
+    def shuffle_deck(self) -> list[dict]:
         deck = self.cards
         random.shuffle(deck)
         return deck
@@ -38,7 +39,7 @@ class SimpleCardGame:
 
         while i < self.max_hand * self.n_players:
             for j in range(self.n_players):
-                card = deck[i]
+                card = deck.__getitem__(i)
                 card_lists[j][1].append(self.get_card_val(card))
                 cards_dealt.append(
                     dict(
@@ -60,7 +61,7 @@ class SimpleCardGame:
             score += c
         return score
 
-    def get_winner(self, card_lists: list):
+    def get_winner(self, card_lists: list) -> tuple[int, int]:
         players = [(n, self.get_score(card_lists[n][1])) for n in range(self.n_players)]
         players.sort(key=lambda x: x[1], reverse=True)
-        return players[0] if players[0][1] <= 21 else players[1]
+        return players[0] if players[0][1] <= self.MAX_SCORE else players[1]

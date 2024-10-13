@@ -4,13 +4,13 @@
         <div class="col-sm-{{ n }}">
             {% set player_num = c_list.0 + 1 -%}
             <div class="row">
-                <div class="col-sm-6">
-                    Player {{ player_num }}
+                <div class="col-sm-4">
+                    <small>Player {{ player_num }}</small>
                 </div>
-                <div class="col-sm-6 me-auto text-end">
+                <div class="col-sm-8">
                     {% if c_list.0 == winner %}
                         <span class="badge bg-warning text-dark">
-                            <i class="fa fa-star-o"></i> WINNER <i class="fa fa-star-o"></i>
+                            <small><i class="fa fa-star-o"></i> WINNER <i class="fa fa-star-o"></i></small>
                         </span>
                     {% endif %}
                 </div>
@@ -25,7 +25,7 @@
                 <div class="card-img">
                     <img class="img-thumbnail playing-card"
                          src="{{ url_for('static', filename='svg_playing_cards/fronts/' + c.card_img) }}"
-                         alt="Player {{ c.player }} {{ c.card_slug }}"
+                         alt="{{ c.player }} {{ c.card_slug }}"
                          data-player="{{ c.player }}"
                          data-face="{{ c.card_face }}"
                          data-value="{{ c.card_val }}">
